@@ -1,0 +1,142 @@
+/* AI Tutor Styling */
+.o_ai_tutor_widget,
+.o_ai_tutor_instructor_widget {
+    position: relative;
+    z-index: 10;
+}
+
+.ai-chat-container {
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.ai-message,
+.user-message {
+    animation: fadeInUp 0.3s ease-in-out;
+}
+
+.ai-message .bg-white,
+.user-message .bg-primary {
+    max-width: 85%;
+    word-wrap: break-word;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.user-message .bg-primary {
+    background-color: #007bff !important;
+}
+
+/* Typing indicator animation */
+.typing-dots {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+}
+
+.typing-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #6c757d;
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes typing {
+    0%, 80%, 100% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* AI Tutor Quick Actions */
+.ai-quick-action {
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    border: none !important;
+}
+
+.ai-quick-action:hover {
+    background-color: #f8f9fa !important;
+    transform: translateX(5px);
+}
+
+.ai-quick-action i {
+    width: 16px;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .o_ai_tutor_widget,
+    .o_ai_tutor_instructor_widget {
+        margin-top: 15px;
+    }
+    
+    .ai-chat-container {
+        height: 150px !important;
+    }
+    
+    .ai-message .bg-white,
+    .user-message .bg-primary {
+        max-width: 90%;
+    }
+}
+
+/* Profile AI Stats Styling */
+.o_ai_tutor_stats {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+}
+
+.o_ai_tutor_stats .border-right {
+    border-color: rgba(255,255,255,0.2) !important;
+}
+
+/* Card hover effects */
+.o_ai_tutor_widget .card,
+.o_ai_tutor_instructor_widget .card {
+    transition: all 0.3s ease;
+}
+
+.o_ai_tutor_widget .card:hover,
+.o_ai_tutor_instructor_widget .card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+/* Input focus styling */
+#aiTutorInput:focus,
+#instructorAIInput:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+/* Success variant for instructor */
+.o_ai_tutor_instructor_widget .btn-success:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40,167,69,0.25);
+}

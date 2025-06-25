@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Extend website slides configuration settings -->
+        <record id="res_config_settings_view_form_ai_tutor" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.ai.tutor</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="website_slides.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='elearning_selection_settings']" position="inside">
+                    <div class="col-12 col-lg-6 o_setting_box" id="ai_tutor_settings">
+                        <div class="o_setting_left_pane">
+                            <field name="ai_tutor_default_enabled"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="ai_tutor_default_enabled"/>
+                            <div class="text-muted">
+                                Enable AI Teaching Assistant functionality by default for new courses
+                            </div>
+                            <div class="content-group" attrs="{'invisible': [('ai_tutor_default_enabled', '=', False)]}">
+                                <div class="mt16">
+                                    <field name="ai_tutor_service_provider" class="o_light_label" widget="radio"/>
+                                    <field name="ai_tutor_api_key" class="o_light_label" password="True" placeholder="Enter your Groq API key"/>
+                                    <div class="text-muted small mt-2">
+                                        <i class="fa fa-info-circle mr-1"></i>
+                                        Current setup uses Groq API for fast, reliable AI responses. Get your free API key at console.groq.com
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

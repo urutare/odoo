@@ -1,0 +1,3 @@
+# AI Teaching Assistant Module Requirements
+groq>=0.9.0
+python-dotenv>=1.0.0

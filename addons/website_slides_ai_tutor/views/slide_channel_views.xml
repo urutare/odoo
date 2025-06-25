@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Extend slide channel form view to add AI tutor settings -->
+        <record id="slide_channel_view_form_ai_tutor" model="ir.ui.view">
+            <field name="name">slide.channel.view.form.ai.tutor</field>
+            <field name="model">slide.channel</field>
+            <field name="inherit_id" ref="website_slides.view_slide_channel_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="AI Teaching Assistant" name="ai_tutor">
+                        <group>
+                            <group string="AI TA Configuration">
+                                <field name="ai_tutor_enabled"/>
+                                <field name="ai_tutor_personality" attrs="{'invisible': [('ai_tutor_enabled', '=', False)]}"/>
+                            </group>
+                            <group string="Customization" attrs="{'invisible': [('ai_tutor_enabled', '=', False)]}">
+                                <field name="ai_tutor_welcome_message" widget="text"/>
+                                <field name="ai_tutor_course_context" widget="text"/>
+                            </group>
+                        </group>
+                        <div attrs="{'invisible': [('ai_tutor_enabled', '=', False)]}" class="mt-3">
+                            <div class="alert alert-info" role="alert">
+                                <h5><i class="fa fa-info-circle mr-2"></i>AI Teaching Assistant Features</h5>
+                                <ul class="mb-0">
+                                    <li><strong>Student Support:</strong> Provides instant help, explanations, and study guidance</li>
+                                    <li><strong>Instructor Assistant:</strong> Helps with content creation, teaching strategies, and assessment design</li>
+                                    <li><strong>24/7 Availability:</strong> Always available to support learning and teaching</li>
+                                    <li><strong>Course-Aware:</strong> Understands course context and adapts responses accordingly</li>
+                                    <li><strong>Personalized:</strong> Adapts to different learning styles and teaching approaches</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Add AI Tutor settings to channel tree view -->
+        <record id="slide_channel_view_tree_ai_tutor" model="ir.ui.view">
+            <field name="name">slide.channel.view.tree.ai.tutor</field>
+            <field name="model">slide.channel</field>
+            <field name="inherit_id" ref="website_slides.slide_channel_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="ai_tutor_enabled" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

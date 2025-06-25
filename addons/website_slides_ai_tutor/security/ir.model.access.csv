@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_slide_channel_ai_tutor_user,slide.channel.ai.tutor.user,website_slides.model_slide_channel,base.group_user,1,0,0,0
+access_slide_channel_ai_tutor_officer,slide.channel.ai.tutor.officer,website_slides.model_slide_channel,website_slides.group_website_slides_officer,1,1,1,1
+access_slide_channel_ai_tutor_manager,slide.channel.ai.tutor.manager,website_slides.model_slide_channel,website_slides.group_website_slides_manager,1,1,1,1

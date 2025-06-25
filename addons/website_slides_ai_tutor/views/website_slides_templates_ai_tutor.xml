@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Extend the lesson detailed template to add AI Tutor -->
+        <template id="slide_main_ai_tutor" inherit_id="website_slides.slide_content_detailed">
+            <xpath expr="." position="inside">
+                <!-- AI Tutor Widget -->
+                <div t-if="slide.channel_id.ai_tutor_enabled" class="o_ai_tutor_widget mt-4">
+                    <div class="card border-primary">
+                        <div class="card-header bg-primary text-white d-flex align-items-center">
+                            <i class="fa fa-graduation-cap mr-2"></i>
+                            <strong>AI Teaching Assistant</strong>
+                            <button class="btn btn-sm btn-outline-light ml-auto" id="toggleAITutor">
+                                <i class="fa fa-chevron-up"></i>
+                            </button>
+                        </div>
+                        <div class="card-body" id="aiTutorBody">
+                            <div id="aiTutorChat" class="ai-chat-container mb-3" style="height: 200px; overflow-y: auto; border: 1px solid #dee2e6; padding: 10px; background-color: #f8f9fa;">
+                                <div class="ai-message mb-2">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fa fa-graduation-cap text-primary mr-2 mt-1"></i>
+                                        <div class="bg-white p-2 rounded shadow-sm flex-grow-1">
+                                            <span t-esc="slide.channel_id.ai_tutor_welcome_message or 'Hello! I\'m your AI Teaching Assistant. I\'m here to help you understand the material, answer questions, and support your learning journey. What can I help you with today?'"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="aiTutorInput" class="form-control" placeholder="Ask your TA anything about this lesson..." maxlength="500"/>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" id="sendAIMessage" type="button">
+                                        <i class="fa fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <small class="text-muted mt-1 d-block">
+                                💡 Your TA can help with: concept explanations, study tips, assignment guidance, and answering questions!
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <!-- Extend the course main template to add AI Tutor for instructors -->
+        <template id="course_main_ai_tutor" inherit_id="website_slides.course_main">
+            <xpath expr="//div[hasclass('o_wslides_course_main')]" position="inside">
+                <!-- AI Tutor for Instructors -->
+                <div t-if="channel.can_publish and channel.ai_tutor_enabled" class="o_ai_tutor_instructor_widget mt-4">
+                    <div class="card border-success">
+                        <div class="card-header bg-success text-white d-flex align-items-center">
+                            <i class="fa fa-chalkboard-teacher mr-2"></i>
+                            <strong>Instructor TA Assistant</strong>
+                            <button class="btn btn-sm btn-outline-light ml-auto" id="toggleInstructorAI">
+                                <i class="fa fa-chevron-up"></i>
+                            </button>
+                        </div>
+                        <div class="card-body" id="instructorAIBody">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div id="instructorAIChat" class="ai-chat-container mb-3" style="height: 150px; overflow-y: auto; border: 1px solid #dee2e6; padding: 10px; background-color: #f8f9fa;">
+                                        <div class="ai-message mb-2">
+                                            <div class="d-flex align-items-start">
+                                                <i class="fa fa-chalkboard-teacher text-success mr-2 mt-1"></i>
+                                                <div class="bg-white p-2 rounded shadow-sm flex-grow-1">
+                                                    Hello! I'm your AI Teaching Assistant. I can help you create better course content, suggest effective teaching strategies, design assessments, and improve student engagement. What would you like to work on today?
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" id="instructorAIInput" class="form-control" placeholder="Ask your TA about teaching strategies, content creation, assessments..." maxlength="500"/>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success" id="sendInstructorAIMessage" type="button">
+                                                <i class="fa fa-paper-plane"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="text-muted">TA Quick Actions:</h6>
+                                    <div class="list-group list-group-flush">
+                                        <button class="list-group-item list-group-item-action py-2 ai-quick-action" data-action="content-ideas">
+                                            <i class="fa fa-lightbulb mr-2"></i>Content &amp; Activities
+                                        </button>
+                                        <button class="list-group-item list-group-item-action py-2 ai-quick-action" data-action="engagement-tips">
+                                            <i class="fa fa-users mr-2"></i>Student Engagement
+                                        </button>
+                                        <button class="list-group-item list-group-item-action py-2 ai-quick-action" data-action="assessment-help">
+                                            <i class="fa fa-check-circle mr-2"></i>Assessment Design
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <!-- Extend the user profile to show AI tutor interactions -->
+        <template id="user_profile_ai_tutor" inherit_id="website_slides.user_profile_content">
+            <xpath expr="//div[hasclass('mb32')][last()]" position="after">
+                <div class="mb32">
+                    <h5 class="border-bottom pb-1">
+                        <i class="fa fa-robot mr-2 text-primary"></i>AI Learning Progress
+                    </h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 text-center">
+                                    <div class="border-right">
+                                        <h4 class="text-primary mb-1">23</h4>
+                                        <small class="text-muted">AI Interactions</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <div class="border-right">
+                                        <h4 class="text-success mb-1">15</h4>
+                                        <small class="text-muted">Questions Answered</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <h4 class="text-warning mb-1">8</h4>
+                                    <small class="text-muted">Study Sessions</small>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="d-flex align-items-center">
+                                <i class="fa fa-chart-line text-info mr-2"></i>
+                                <span class="text-muted">Your AI learning assistant has helped you improve by 35% this month!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
